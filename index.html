@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>find prime</title>
+    <style type="text/css">
+        #contents {
+            width:50%;
+            min-width:400px;
+            padding: 20px 50px;
+        }
+        #tables {
+            border: 1px solid #bbb;
+            max-width: 300px;
+            min-height: 30px;
+            max-height: 300px;
+            overflow: auto;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="contents">
+        <h4>소수 찾기</h4>
+    
+        <label for="num">숫자 입력</label>
+        <input type="number" id="num" max="500" onkeypress="if(event.keyCode==13){enterFn();}">
+        <button id="btn">
+            확인
+        </button>
+    
+        <h4>결과</h4>
+        <div id="tables">
+        </div>
+    </div>
+    
+</body>
+
+</html>
+
+<script>
+
+    // enter 키 이벤트
+    function enterFn(){
+        $('#btn').click();
+    }
+
+    // 소수 배열
+    var primeArr = [];
+
+    // 테이블 그리기
+    function showTable(){
+        
+        $('#tables').empty();
+        var html = '<table><tr>';
+        var m = 0;
+
+        for (var i=0; i<primeArr.length; i++){
+
+            var j = primeArr[i];
+            var k = parseInt(j/10)*1;
+            
+            if(k > m){
+                html += '</tr><tr><td>' + j + '</td>';
+                m=k;
+            }else if(k == m){
+                html += '<td>' + j + '</td>';
+            }
+
+        }
+
+        html += '</tr></table>';
+        primeArr = [];
+
+        $('#tables').html(html);
+    }
+
+    // 버튼 클릭 이벤트
+    $('#btn').click(function(){
+
+        var num = $('#num').val()*1;
+                        
+        if(num === null || num === undefined || num === 0 || num === "" || num > 1000) {
+            
+            alert('0 이상 1000 이하의 숫자를 입력해주세요');
+            return false;
+    
+        } else {
+    
+            for (var i=1; i<num+1; i++){
+                if( i === 1) {
+                    // 1인 경우 : pass
+                } else if (i > 1) {
+                    if ( i === 2) {
+                        primeArr.push(i); 
+                    }else {
+                        
+                        for (var j=0; j<primeArr.length; j++){
+                            if(i%primeArr[j] !== 0 ) {
+                                if ( j == primeArr.length-1){
+                                    if(primeArr[j] !== i){
+                                        primeArr.push(i);
+                                        // console.log(i + ' 소수');
+                                    }else{
+                                        // return false;
+                                    }
+                                    
+                                }
+                            } else {
+
+                                break;
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            
+            console.log('primeArr : [' + primeArr + ']');
+            showTable();
+        }
+    
+        
+    
+    });
+
+</script>
