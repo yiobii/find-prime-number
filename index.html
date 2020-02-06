@@ -26,15 +26,15 @@
 
 <body>
     <div id="contents">
-        <h4>소수 찾기</h4>
+        <h4>find prime number</h4>
     
-        <label for="num">숫자 입력</label>
+        <label for="num">enter a number</label>
         <input type="number" id="num" max="500" onkeypress="if(event.keyCode==13){enterFn();}">
         <button id="btn">
-            확인
+            check
         </button>
     
-        <h4>결과</h4>
+        <h4>result</h4>
         <div id="tables">
         </div>
     </div>
@@ -45,15 +45,15 @@
 
 <script>
 
-    // enter 키 이벤트
+    // enter event
     function enterFn(){
         $('#btn').click();
     }
 
-    // 소수 배열
+    // prime number array
     var primeArr = [];
 
-    // 테이블 그리기
+    // show table
     function showTable(){
         
         $('#tables').empty();
@@ -80,21 +80,21 @@
         $('#tables').html(html);
     }
 
-    // 버튼 클릭 이벤트
+    // btn click event
     $('#btn').click(function(){
 
         var num = $('#num').val()*1;
                         
         if(num === null || num === undefined || num === 0 || num === "" || num > 1000) {
             
-            alert('0 이상 1000 이하의 숫자를 입력해주세요');
+            alert('Please enter a number of 0 - 1000.');
             return false;
     
         } else {
     
             for (var i=1; i<num+1; i++){
                 if( i === 1) {
-                    // 1인 경우 : pass
+                    // 1 : pass
                 } else if (i > 1) {
                     if ( i === 2) {
                         primeArr.push(i); 
@@ -105,7 +105,7 @@
                                 if ( j == primeArr.length-1){
                                     if(primeArr[j] !== i){
                                         primeArr.push(i);
-                                        // console.log(i + ' 소수');
+                                        // console.log(i + ' prime number');
                                     }else{
                                         // return false;
                                     }
